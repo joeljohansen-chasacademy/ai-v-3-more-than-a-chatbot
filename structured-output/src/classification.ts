@@ -29,7 +29,7 @@ async function classificationWithStructuredOutput() {
 	console.log(
 		"\n=== Example 2: Multi-class Classification with Confidence ==="
 	);
-	const instruments = ["piano", "violin", "trumpet", "drums", "flute"];
+	const instruments = ["piano", "tomato"];
 
 	for (const instrument of instruments) {
 		const response = await ai.models.generateContent({
@@ -117,8 +117,18 @@ async function classificationWithStructuredOutput() {
 							type: Type.STRING,
 							description: "Brief summary of the review sentiment",
 						},
+						recommendations: {
+							type: Type.STRING,
+							description: "What other products can be recommended.",
+						},
 					},
-					required: ["sentiment", "score", "keyPhrases", "summary"],
+					required: [
+						"sentiment",
+						"score",
+						"keyPhrases",
+						"summary",
+						"recommendations",
+					],
 				},
 			},
 		});
@@ -134,6 +144,7 @@ async function classificationWithStructuredOutput() {
 		);
 		console.log(`Key phrases: ${analysis.keyPhrases.join(", ")}`);
 		console.log(`Summary: ${analysis.summary}\n`);
+		console.log(`Recommendations: ${analysis.recommendations}\n`);
 	}
 }
 

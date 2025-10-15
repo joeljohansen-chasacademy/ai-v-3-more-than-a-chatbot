@@ -12,7 +12,7 @@ async function informationExtraction() {
 	const unstructuredText = `
 	Johann Sebastian Bach was a German composer and musician of the Baroque period. Born on March 31, 1685, in Eisenach, Germany, 
 	Bach came from a family of musicians and became one of the most influential composers in Western music history. 
-	He died on July 28, 1750, in Leipzig, Germany, at the age of 65. Bach's works include the Brandenburg Concertos, 
+	He died on July 28, 1750, in Leipzig, Germany. Bach's works include the Brandenburg Concertos, 
 	the Goldberg Variations, the Mass in B minor, and hundreds of cantatas. He was known for his mastery of counterpoint, 
 	harmony, and musical form. Bach held various positions as organist and music director throughout his life, including 
 	positions in Weimar, Köthen, and Leipzig. His music was largely forgotten after his death but was rediscovered in 
@@ -27,9 +27,13 @@ async function informationExtraction() {
 			responseSchema: {
 				type: Type.OBJECT,
 				properties: {
-					name: {
+					firstName: {
 						type: Type.STRING,
-						description: "Full name of the composer",
+						description: "First name of the composer",
+					},
+					lastName: {
+						type: Type.STRING,
+						description: "Last name of the composer",
 					},
 					dateOfBirth: {
 						type: Type.STRING,
@@ -72,7 +76,8 @@ async function informationExtraction() {
 					},
 				},
 				required: [
-					"name",
+					"firstName",
+					"lastName",
 					"dateOfBirth",
 					"dateOfDeath",
 					"nationality",
@@ -91,7 +96,8 @@ async function informationExtraction() {
 
 	console.log("Extracted Composer Information:");
 	console.log("==============================");
-	console.log(`Name: ${composerData.name}`);
+	console.log(`First name: ${composerData.firstName}`);
+	console.log(`Last name: ${composerData.lastName}`);
 	console.log(`Born: ${composerData.dateOfBirth}`);
 	console.log(
 		`Died: ${composerData.dateOfDeath} (age ${composerData.ageAtDeath})`
